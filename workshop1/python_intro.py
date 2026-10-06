@@ -148,7 +148,7 @@ def lab_one():
     mo.md("""
     ## Lab 1 takes 20 minutes
 
-    Open **python_lab.ipynb** and go to **Lab 1**.
+    Open **python_lab.ipynb** in Colab and go to **Lab 1**.
 
     1. Predict expression results, then check their types.
     2. Calculate spaces and income, then update the booking count.
@@ -320,7 +320,7 @@ def lab_two():
     mo.md("""
     ## Lab 2 takes 20 minutes
 
-    Open **python_lab.ipynb** and go to **Lab 2**.
+    Go to **Lab 2** in Colab.
 
     1. Predict and test the messages for 25, 60 and 61 bookings.
     2. Read two errors, explain their causes and repair the code.
