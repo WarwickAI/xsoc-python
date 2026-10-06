@@ -150,9 +150,11 @@ def lab_one():
 
     Open **python_lab.ipynb** and go to **Lab 1**.
 
-    1. Evaluate expressions and identify their types.
-    2. Calculate spaces and ticket income.
-    3. Convert a sign-up count from text.
+    1. Predict expression results, then check their types.
+    2. Calculate spaces and income, then update the booking count.
+    3. Convert a form’s text into an updated booking count.
+
+    Start with the notebook instructions. Try the extension if you have time.
     """)
     return
 
@@ -177,10 +179,10 @@ def decisions():
     Comparisons produce a Boolean value: `True` or `False`.
 
     ```python
-    signups = 25
-    room_limit = 60
-    signups < room_limit   # True: fewer signups than places
-    signups == room_limit  # False: the room is not exactly full
+    booked = 25
+    capacity = 60
+    booked < capacity   # True: fewer bookings than places
+    booked == capacity  # False: the room is not exactly full
     ```
 
     A program can use that answer to decide what to do next.
@@ -196,16 +198,16 @@ def if_statements():
     Think: **if there is room, accept another booking. Otherwise, say the room is full.**
 
     ```python
-    signups = 25
-    room_limit = 60
-    if signups < room_limit:
+    booked = 25
+    capacity = 60
+    if booked < capacity:
         print("You can book a place")
     else:
         print("The room is full")
     ```
 
     The condition is `True`, so this prints **You can book a place** and skips the `else` branch.
-    With `signups = 60`, it would print **The room is full** instead.
+    With `booked = 60`, it would print **The room is full** instead.
 
     The colon starts a branch. Press Tab to indent the code inside it.
     `else` handles a false condition. To check another condition first, add an `elif` branch before `else`.
@@ -215,34 +217,34 @@ def if_statements():
 
 @app.cell
 def demo_simple_decision():
-    # tickets_requested = 4
-    # spaces_left = 5
-    # if tickets_requested <= spaces_left:
-    #     booking_message = ...  # The whole group fits.
+    # capacity = 60
+    # booked = 25
+    # if booked < capacity:
+    #     booking_message = "You can book a place"
     # else:
-    #     booking_message = ...  # There are not enough places.
+    #     booking_message = "The room is full"
     # booking_message
-    # Test tickets_requested = 4, 5 and 6.
+    # Predict the message for booked = 25 and booked = 60, then run each.
     mo.md("""
-    ## Demo: can the whole group book?
-    There are five spaces left. Use `if` and `else` to decide whether a group fits.
-    `<=` means “less than or equal to”. Which branch should run for exactly five tickets?
+    ## Demo: predict the branch
+    Predict which message appears for 25 bookings, then for exactly 60.
+    Change the booking count and run the code to check each prediction.
     """)
     return
 
 
 @app.cell
 def demo_decisions():
-    # room_limit = 60
-    # signups = 25
-    # if signups > room_limit:
+    # capacity = 60
+    # booked = 25
+    # if booked > capacity:
     #     message = ...
     # elif ...:  # Check whether the room is exactly full.
     #     message = ...
     # else:
     #     message = ...
     # message
-    # Test signups = 25, 60 and 61.
+    # Test booked = 25, 60 and 61.
     mo.md("""
     ## Demo: is there room?
     Use `if`, `elif` and `else` to handle bookings below, at and above the room limit.
@@ -320,9 +322,11 @@ def lab_two():
 
     Open **python_lab.ipynb** and go to **Lab 2**.
 
-    1. Build the capacity decision and test 25, 60, 61.
-    2. Diagnose and fix two small bugs.
+    1. Predict and test the messages for 25, 60 and 61 bookings.
+    2. Read two errors, explain their causes and repair the code.
     3. Use the documentation to round a room’s occupancy percentage.
+
+    Finish with the checkpoint. Group bookings and a logic bug are optional extensions.
     """)
     return
 
