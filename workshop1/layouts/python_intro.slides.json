@@ -28,6 +28,10 @@
       },
       {
         "type": "slide",
+        "showCode": false
+      },
+      {
+        "type": "slide",
         "showCode": true
       },
       {

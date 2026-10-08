@@ -65,24 +65,94 @@ def python_path():
 
 @app.cell(hide_code=True)
 def variables():
-    mo.md("""
-    ## A variable gives a value a name
+    mo.vstack(
+        [
+            mo.md("""
+            ## A variable is a named box
 
-    Think of a variable as a label attached to a value, so you can refer to it later.
-    Choose a name that tells you what the value means.
+            Think of a variable as a box with a name on it, so you can refer to its value later.
+            Choose a name that tells you what the value means.
+            """),
+            mo.hstack(
+                [
+                    mo.md("""
+                    ```python
+                    capacity = 60
+                    booked = 25
+                    booked = 30
+                    ```
+                    """),
+                    mo.mermaid("""
+                    graph LR
+                        subgraph capacity
+                            C["60"]
+                        end
+                        subgraph booked
+                            B["30"]
+                        end
+                        O["25"] -.->|"replaced by booked = 30"| B
+                    """),
+                ],
+                widths=[1, 1],
+                align="center",
+            ),
+            mo.md("""
+            `=` means **assign**: put the value on the right into the box on the left.
+            A box holds one value at a time, so `booked = 30` throws away the `25`.
 
-    ```python
-    capacity = 60
-    booked = 25
-    spaces = capacity - booked
-    ```
+            This is not a maths equation. In maths, `x = x + 1` has no solution.
+            In Python, `booked = booked + 1` takes `30` out, adds 1 and puts `31` back.
+            """),
+        ]
+    )
+    return
 
-    `=` means **assign**: work out the value on the right, then attach the name on the left.
-    Here, `spaces` refers to `35`, the number of places left.
 
-    You can assign a new value with `booked = 30`. In a Python script, run
-    `spaces = capacity - booked` again to update `spaces` to `30`.
-    """)
+@app.cell(hide_code=True)
+def assignment():
+    mo.vstack(
+        [
+            mo.md("""
+            ## Python reads the boxes, then fills a new one
+
+            Python works out the right-hand side first, then stores the result.
+            """),
+            mo.hstack(
+                [
+                    mo.md("""
+                    ```python
+                    capacity = 60
+                    booked = 25
+                    spaces = capacity - booked
+                    ```
+                    """),
+                    mo.mermaid("""
+                    graph LR
+                        subgraph capacity
+                            C["60"]
+                        end
+                        subgraph booked
+                            B["25"]
+                        end
+                        subgraph spaces
+                            S["35"]
+                        end
+                        C -->|"copy 60"| E["60 - 25"]
+                        B -->|"copy 25"| E
+                        E -->|"store 35"| S
+                    """),
+                ],
+                widths=[1, 1],
+                align="center",
+            ),
+            mo.md("""
+            Reading a box copies its value, so `capacity` and `booked` still hold `60` and `25`.
+
+            `spaces` does not update itself. If you change `booked` to `30`, run
+            `spaces = capacity - booked` again to update `spaces` to `30`.
+            """),
+        ]
+    )
     return
 
 
@@ -192,26 +262,43 @@ def decisions():
 
 @app.cell(hide_code=True)
 def if_statements():
-    mo.md("""
-    ## An if statement chooses what happens next
+    mo.vstack(
+        [
+            mo.md("""
+            ## An if statement chooses what happens next
 
-    Think: **if there is room, accept another booking. Otherwise, say the room is full.**
+            Think: **if there is room, accept another booking. Otherwise, say the room is full.**
+            """),
+            mo.hstack(
+                [
+                    mo.md("""
+                    ```python
+                    booked = 25
+                    capacity = 60
+                    if booked < capacity:
+                        print("You can book a place")
+                    else:
+                        print("The room is full")
+                    ```
+                    """),
+                    mo.mermaid("""
+                    graph TB
+                        Q{"booked #lt; capacity?"} -->|True| A["You can book a place"]
+                        Q -->|False| B["The room is full"]
+                    """),
+                ],
+                widths=[1, 1],
+                align="center",
+            ),
+            mo.md("""
+            The condition is `True`, so this prints **You can book a place** and skips the `else` branch.
+            With `booked = 60`, it would print **The room is full** instead.
 
-    ```python
-    booked = 25
-    capacity = 60
-    if booked < capacity:
-        print("You can book a place")
-    else:
-        print("The room is full")
-    ```
-
-    The condition is `True`, so this prints **You can book a place** and skips the `else` branch.
-    With `booked = 60`, it would print **The room is full** instead.
-
-    The colon starts a branch. Press Tab to indent the code inside it.
-    `else` handles a false condition. To check another condition first, add an `elif` branch before `else`.
-    """)
+            The colon starts a branch. Press Tab to indent the code inside it.
+            `else` handles a false condition. To check another condition first, add an `elif` branch before `else`.
+            """),
+        ]
+    )
     return
 
 
@@ -254,16 +341,18 @@ def demo_decisions():
 
 @app.cell(hide_code=True)
 def errors():
-    mo.md("""
-    ## Fixing errors
-
-    1. Read the error type and message on the last line.
-    2. Find the relevant line of your code.
-    3. Fix the cause of the error.
-    4. Rerun the code to check the fix.
-
-    A misspelled variable name can cause a `NameError`.
-    """)
+    mo.vstack(
+        [
+            mo.md("## Fixing errors"),
+            mo.mermaid("""
+            graph LR
+                R["1. Read the error type and<br/>message on the last line"] --> F["2. Find the relevant<br/>line of your code"]
+                F --> X["3. Fix the cause<br/>of the error"] --> U["4. Rerun the code<br/>to check the fix"]
+                U -->|still an error| R
+            """),
+            mo.md("A misspelled variable name can cause a `NameError`."),
+        ]
+    )
     return
 
 
