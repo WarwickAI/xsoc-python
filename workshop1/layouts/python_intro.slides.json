@@ -32,11 +32,11 @@
       },
       {
         "type": "slide",
-        "showCode": true
+        "showCode": false
       },
       {
         "type": "slide",
-        "showCode": true
+        "showCode": false
       },
       {
         "type": "slide",
@@ -60,11 +60,15 @@
       },
       {
         "type": "slide",
-        "showCode": true
+        "showCode": false
+      },
+      {
+        "type": "skip",
+        "showCode": false
       },
       {
         "type": "slide",
-        "showCode": true
+        "showCode": false
       },
       {
         "type": "slide",

@@ -21,7 +21,7 @@ def welcome():
     mo.md("""
     # Workshop 1
 
-    The Python course is run by Warwick AI, CodeSoc and UWCS.
+    The Python course is run by Warwick AI (WAI), CodeSoc and UWCS.
 
     No previous Python experience is needed.
     """)
@@ -47,9 +47,9 @@ def today():
 @app.cell(hide_code=True)
 def python_path():
     mo.md("""
-    ## Python Course plan
+    ## Course plan
 
-    | Session | Week | Start | What you will build on | Organising society |
+    | Session | Week | Start | Topics | Run by |
     |---|---|---|---|---|
     | 1 | 2 | 18:30 | Variables, casting, decisions and errors | WAI + UWCS |
     | 2 | 3 | 18:00 | Loops, lists and functions | WAI |
@@ -57,8 +57,6 @@ def python_path():
     | 4 | 5 | 18:00 | Dictionaries and an introduction to classes | CodeSoc |
     | 5 | 7 | 18:00 | A bigger project and practice using documentation | CodeSoc |
     | 6 | 8 | 18:30 | Python for data science with pandas | WAI |
-
-    WAI stands for Warwick AI. All sessions meet on Wednesdays in MS.05 and end at 20:00.
     """)
     return
 
@@ -70,8 +68,8 @@ def variables():
             mo.md("""
             ## A variable is a named box
 
-            Think of a variable as a box with a name on it, so you can refer to its value later.
-            Choose a name that tells you what the value means.
+            A variable is a box with a name on it, so you can refer to its value later.
+            Choose a name that says what the value means.
             """),
             mo.hstack(
                 [
@@ -96,15 +94,22 @@ def variables():
                 widths=[1, 1],
                 align="center",
             ),
-            mo.md("""
-            `=` means **assign**: put the value on the right into the box on the left.
-            A box holds one value at a time, so `booked = 30` throws away the `25`.
-
-            This is not a maths equation. In maths, `x = x + 1` has no solution.
-            In Python, `booked = booked + 1` takes `30` out, adds 1 and puts `31` back.
-            """),
         ]
     )
+    return
+
+
+@app.cell(hide_code=True)
+def assign_not_equals():
+    mo.md("""
+    ## `=` means assign, not equals
+
+    Put the value on the right into the box on the left.
+    A box holds one value at a time, so `booked = 30` throws away the `25`.
+
+    This is not a maths equation. In maths, `x = x + 1` has no solution.
+    In Python, `booked = booked + 1` takes `30` out, adds 1 and puts `31` back.
+    """)
     return
 
 
@@ -145,14 +150,21 @@ def assignment():
                 widths=[1, 1],
                 align="center",
             ),
-            mo.md("""
-            Reading a box copies its value, so `capacity` and `booked` still hold `60` and `25`.
-
-            `spaces` does not update itself. If you change `booked` to `30`, run
-            `spaces = capacity - booked` again to update `spaces` to `30`.
-            """),
         ]
     )
+    return
+
+
+@app.cell(hide_code=True)
+def boxes_keep_values():
+    mo.md("""
+    ## Each box keeps its own value
+
+    Reading a box copies its value, so `capacity` and `booked` still hold `60` and `25`.
+
+    `spaces` does not update itself. If you change `booked` to `30`, run
+    `spaces = capacity - booked` again to get `30`.
+    """)
     return
 
 
@@ -161,11 +173,11 @@ def values():
     mo.md("""
     ## A value has a type
 
-    The value’s type affects what you can do with it.
+    The type decides what you can do with the value.
 
-    `60` is an integer, and `2.5` is a float.
+    `60` is an integer and `2.5` is a float.
 
-    `"60"` is a string containing text, and `True` is a Boolean value.
+    `"60"` is a string of text and `True` is a Boolean.
 
     `"6" + "0"` joins two strings to give `"60"`.
     """)
@@ -173,42 +185,15 @@ def values():
 
 
 @app.cell
-def demo_values():
-    # capacity = 60
-    # booked = 25
-    # spaces = ...  # Calculate the remaining spaces.
-    # spaces
-    mo.md("""
-    ## Demo: name a value
-    Calculate the spaces remaining from the room capacity and booking count.
-    """)
-    return
-
-
-@app.cell
 def demo_casting():
-    # tickets_text = "25"
-    # tickets_text + "1"
-    # int(tickets_text) + 1
-    # int("twenty-five")  # Read the error, then repair this line.
+    # tickets_text = "4"
+    # price_text = "3.75"
+    # int(price_text)
+    # cost = int(tickets_text) * float(price_text)
+    # "Total: £" + cost
     mo.md("""
-    ## Demo: turn text into a number
-    Convert a sign-up count from text to an integer before adding another booking.
-    """)
-    return
-
-
-@app.cell
-def demo_booking_cost():
-    # group_size_text = "4"
-    # ticket_price = 2.50
-    # group_size = ...  # Convert the booking count to an integer.
-    # total_cost = ...  # Multiply the count by the ticket price.
-    # total_cost
-    mo.md("""
-    ## Demo: price a group booking
-    Four friends book tickets at £2.50 each. The form gives us the count as text.
-    Convert the count to an integer and calculate the total cost.
+    ## Demo: convert text and back again
+    Form text to `int` and `float`, then back to text with `str`.
     """)
     return
 
@@ -224,7 +209,7 @@ def lab_one():
     2. Calculate spaces and income, then update the booking count.
     3. Convert a form’s text into an updated booking count.
 
-    Start with the notebook instructions. Try the extension if you have time.
+    Follow the notebook. Try the extension if you have time.
     """)
     return
 
@@ -244,9 +229,9 @@ def decisions():
     mo.md("""
     ## A comparison asks a yes-or-no question
 
-    Use `=` to assign a value and `==` to compare two values.
+    `=` assigns a value. `==` compares two values.
 
-    Comparisons produce a Boolean value: `True` or `False`.
+    A comparison gives a Boolean: `True` or `False`.
 
     ```python
     booked = 25
@@ -267,7 +252,7 @@ def if_statements():
             mo.md("""
             ## An if statement chooses what happens next
 
-            Think: **if there is room, accept another booking. Otherwise, say the room is full.**
+            If there is room, accept another booking. Otherwise, say the room is full.
             """),
             mo.hstack(
                 [
@@ -290,52 +275,92 @@ def if_statements():
                 widths=[1, 1],
                 align="center",
             ),
-            mo.md("""
-            The condition is `True`, so this prints **You can book a place** and skips the `else` branch.
-            With `booked = 60`, it would print **The room is full** instead.
-
-            The colon starts a branch. Press Tab to indent the code inside it.
-            `else` handles a false condition. To check another condition first, add an `elif` branch before `else`.
-            """),
         ]
     )
     return
 
 
-@app.cell
-def demo_simple_decision():
-    # capacity = 60
-    # booked = 25
-    # if booked < capacity:
-    #     booking_message = "You can book a place"
-    # else:
-    #     booking_message = "The room is full"
-    # booking_message
-    # Predict the message for booked = 25 and booked = 60, then run each.
+@app.cell(hide_code=True)
+def if_branches():
     mo.md("""
-    ## Demo: predict the branch
-    Predict which message appears for 25 bookings, then for exactly 60.
-    Change the booking count and run the code to check each prediction.
+    ## The condition picks one branch
+
+    The condition is `True`, so this prints **You can book a place** and skips the `else` branch.
+    With `booked = 60`, it would print **The room is full** instead.
+
+    The colon starts a branch. Press Tab to indent the code inside it.
+    `else` runs when the condition is `False`.
     """)
     return
 
 
-@app.cell
-def demo_decisions():
-    # capacity = 60
-    # booked = 25
-    # if booked > capacity:
-    #     message = ...
-    # elif ...:  # Check whether the room is exactly full.
-    #     message = ...
-    # else:
-    #     message = ...
-    # message
-    # Test booked = 25, 60 and 61.
-    mo.md("""
-    ## Demo: is there room?
-    Use `if`, `elif` and `else` to handle bookings below, at and above the room limit.
-    """)
+@app.cell(hide_code=True)
+def price_controls():
+    age = mo.ui.slider(5, 80, value=30, label="age", show_value=True)
+    is_member = mo.ui.switch(label="is_member")
+    return age, is_member
+
+
+@app.cell(hide_code=True)
+def elif_flow(age, is_member):
+    _branches = [
+        ("age < 12", age.value < 12, "0.00"),
+        ("is_member", is_member.value, "1.50"),
+        ("age >= 65", age.value >= 65, "2.00"),
+    ]
+    _taken = next((i for i, (_, true, _) in enumerate(_branches) if true), 3)
+
+    _lines = [(f"age = {age.value}", ""), (f"is_member = {is_member.value}", "")]
+    for _i, (_condition, _, _price) in enumerate(_branches):
+        _check = "True" if _i == _taken else "False" if _i < _taken else "not checked"
+        _lines.append((f"{'if' if _i == 0 else 'elif'} {_condition}:", _check))
+        _lines.append((f"    price = {_price}", "runs" if _i == _taken else ""))
+    _lines.append(("else:", ""))
+    _lines.append(("    price = 2.50", "runs" if _taken == 3 else ""))
+    _code = "\n".join(f"{c:<20}# {n}" if n else c for c, n in _lines)
+
+    _path_edges = [2 * i + 1 for i in range(min(_taken, 3))] + ([2 * _taken] if _taken < 3 else [])
+    _checked = [f"D{i}" for i in range(min(_taken + 1, 3))]
+    _skipped = [f"D{i}" for i in range(_taken + 1, 3)] + [f"P{i}" for i in range(4) if i != _taken]
+    _flow = f"""
+    graph TB
+        D0{{"age #lt; 12?"}} -->|True| P0["price = 0.00"]
+        D0 -->|False| D1{{"is_member?"}}
+        D1 -->|True| P1["price = 1.50"]
+        D1 -->|False| D2{{"age #gt;= 65?"}}
+        D2 -->|True| P2["price = 2.00"]
+        D2 -->|False| P3["price = 2.50"]
+        classDef checked stroke:#eb6834,stroke-width:3px
+        classDef taken fill:#eb6834,stroke:#eb6834,color:#fff
+        classDef skipped fill:#f4f4f2,stroke:#d6d5d0,color:#a9a8a3
+        class {",".join(_checked)} checked
+        class P{_taken} taken
+        class {",".join(_skipped)} skipped
+        linkStyle {",".join(map(str, _path_edges))} stroke:#eb6834,stroke-width:3px
+    """
+
+    _status = (
+        f"`{_branches[_taken][0]}` is the first `True` condition, so `price = {_branches[_taken][2]}`."
+        if _taken < 3
+        else "No condition is `True`, so the `else` branch runs: `price = 2.50`."
+    )
+
+    mo.vstack(
+        [
+            mo.md("""
+            ## elif checks conditions in order
+
+            Python runs the branch under the first `True` condition and skips the rest.
+            """),
+            mo.hstack([age, is_member], justify="start", gap=2),
+            mo.hstack(
+                [mo.md(f"```python\n{_code}\n```"), mo.mermaid(_flow)],
+                widths=[1, 1],
+                align="center",
+            ),
+            mo.md(_status),
+        ]
+    )
     return
 
 
@@ -350,7 +375,7 @@ def errors():
                 F --> X["3. Fix the cause<br/>of the error"] --> U["4. Rerun the code<br/>to check the fix"]
                 U -->|still an error| R
             """),
-            mo.md("A misspelled variable name can cause a `NameError`."),
+            mo.md("For example, a misspelled variable name causes a `NameError`."),
         ]
     )
     return
@@ -358,16 +383,16 @@ def errors():
 
 @app.cell
 def demo_errors():
-    # booking_count = 10
-    # booking_cout
-    # spaces = 40 - "25"
-    # spaces
+    # capacity = 60
+    # booked = 25
+    # if booked < capacity
+    #     message = "Spaces left: " + (capacity - booked)
+    # else:
+    #     mesage = "Full"
+    # message
     mo.md("""
-    ## Demo: fix two errors
-    Uncomment the first two lines and run the cell. Use the `NameError` message to find the misspelled name.
-
-    Fix the name, then uncomment the remaining lines. Resolve the `TypeError`
-    by converting the text to an integer before subtracting.
+    ## Demo: fix three errors
+    A `SyntaxError`, a `TypeError`, then a bug that only appears when the other branch runs.
     """)
     return
 
@@ -377,29 +402,22 @@ def learn():
     mo.md("""
     ## Reading documentation
 
-    For example: how can you round a number to one decimal place?
+    How do you round a number to one decimal place?
 
-    Look up the function in the Python documentation, identify the inputs it needs,
-    then use it in your code.
+    Find the function in the Python documentation, check what inputs it needs, then use it.
     """)
     return
 
 
 @app.cell
 def demo_documentation():
-    # distance = 3.76
-    # rounded_distance = ...  # Use the documentation to round to one decimal place.
-    # rounded_distance
-    # Compare round(distance, 1) with round(distance).
+    # round(3.7)
+    # round(0.5)
+    # round(1.5)
+    # round(2.5)
     mo.md("""
-    ## Demo: use round() from the documentation
-    We want to round a distance of 3.76 km to one decimal place.
-
-    Open the [Python documentation for `round`](https://docs.python.org/3/library/functions.html#round).
-    Read the first paragraph: what do `number` and `ndigits` mean?
-
-    Use those inputs to write and run a call to `round`.
-    What changes if you leave out `ndigits`?
+    ## Demo: when round() surprises you
+    `round(2.5)` gives `2`. The [documentation](https://docs.python.org/3/library/functions.html#round) explains why.
     """)
     return
 
@@ -412,7 +430,7 @@ def lab_two():
     Go to **Lab 2** in Colab.
 
     1. Predict and test the messages for 25, 60 and 61 bookings.
-    2. Read two errors, explain their causes and repair the code.
+    2. Read two errors and fix the code.
     3. Use the documentation to round a room’s occupancy percentage.
 
     Finish with the checkpoint. Group bookings and a logic bug are optional extensions.
