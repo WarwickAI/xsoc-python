@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["marimo==0.24.0"]
+# dependencies = ["marimo==0.24.0", "segno==1.6.6"]
 # ///
 
 import marimo
@@ -14,17 +14,33 @@ app = marimo.App(
 
 with app.setup(hide_code=True):
     import marimo as mo
+    import segno
+
+    colab_url = "https://colab.research.google.com/github/WarwickAI/xsoc-python/blob/main/workshop1/python_lab.ipynb"
+    colab_qr = mo.vstack(
+        [
+            mo.Html(segno.make(colab_url).svg_inline(scale=6, light="#fff")),
+            mo.md("[bit.ly/4B5n863](https://bit.ly/4B5n863)"),
+        ],
+        align="center",
+    )
 
 
 @app.cell(hide_code=True)
 def welcome():
-    mo.md("""
-    # Workshop 1
+    mo.hstack(
+        [
+            mo.md(f"""
+            # Workshop 1
 
-    The Python course is run by Warwick AI (WAI), CodeSoc and UWCS.
+            The Python course is run by Warwick AI (WAI), CodeSoc and UWCS.
 
-    No previous Python experience is needed.
-    """)
+            No previous Python experience is needed.
+            """),
+        ],
+        widths=[2, 1],
+        align="center",
+    )
     return
 
 
@@ -36,8 +52,7 @@ def today():
     | Start | Duration | Activity |
     |---|---|---|
     | 18:30 | 20 minutes | Values and conversion |
-    | 18:50 | 20 minutes | Lab 1 |
-    | 19:10 | 10 minutes | Break |
+    | 18:50 | 20 minutes | Lab 1 |c
     | 19:20 | 20 minutes | Decisions and debugging |
     | 19:40 | 20 minutes | Lab 2 |
     """)
@@ -128,7 +143,7 @@ def assignment():
                     ```python
                     capacity = 60
                     booked = 25
-                    spaces = capacity - booked
+                    spaces = 60 - 25c
                     ```
                     """),
                     mo.mermaid("""
@@ -186,41 +201,28 @@ def values():
 
 @app.cell
 def demo_casting():
-    # tickets_text = "4"
-    # price_text = "3.75"
-    # int(price_text)
-    # cost = int(tickets_text) * float(price_text)
-    # "Total: £" + cost
-    mo.md("""
-    ## Demo: convert text and back again
-    Form text to `int` and `float`, then back to text with `str`.
-    """)
+    tickets_text = "4"
+    price_text = "3.75"
+    cost = int(tickets_text) * float(price_text)
+    str(cost)
+    "Total: £" +str(cost)
     return
 
 
 @app.cell(hide_code=True)
 def lab_one():
-    mo.md("""
-    ## Lab 1 takes 20 minutes
+    mo.hstack(
+        [
+            mo.md(f"""
+            ## Lab 1 takes 20 minutes
 
-    Open **python_lab.ipynb** in Colab and go to **Lab 1**.
-
-    1. Predict expression results, then check their types.
-    2. Calculate spaces and income, then update the booking count.
-    3. Convert a form’s text into an updated booking count.
-
-    Follow the notebook. Try the extension if you have time.
-    """)
-    return
-
-
-@app.cell(hide_code=True)
-def break_time():
-    mo.md("""
-    ## 10-minute break
-
-    The session resumes at **19:20**.
-    """)
+            No need to save a copy :)
+            """),
+            colab_qr,
+        ],
+        widths=[2, 1],
+        align="center",
+    )
     return
 
 
@@ -262,6 +264,7 @@ def if_statements():
                     capacity = 60
                     if booked < capacity:
                         print("You can book a place")
+                        print("test)
                     else:
                         print("The room is full")
                     ```
@@ -383,17 +386,13 @@ def errors():
 
 @app.cell
 def demo_errors():
-    # capacity = 60
-    # booked = 25
-    # if booked < capacity
-    #     message = "Spaces left: " + (capacity - booked)
-    # else:
-    #     mesage = "Full"
-    # message
-    mo.md("""
-    ## Demo: fix three errors
-    A `SyntaxError`, a `TypeError`, then a bug that only appears when the other branch runs.
-    """)
+    capacity = 60
+    booked = 25
+    if booked < capacity:
+        message = "Spaces left: " + str(capacity - booked)
+    else:
+        mesage = "Full"
+    message
     return
 
 
@@ -411,30 +410,33 @@ def learn():
 
 @app.cell
 def demo_documentation():
-    # round(3.7)
+    round(3.7)
     # round(0.5)
     # round(1.5)
-    # round(2.5)
-    mo.md("""
-    ## Demo: when round() surprises you
-    `round(2.5)` gives `2`. The [documentation](https://docs.python.org/3/library/functions.html#round) explains why.
-    """)
+    round(2.5)
     return
 
 
 @app.cell(hide_code=True)
 def lab_two():
-    mo.md("""
-    ## Lab 2 takes 20 minutes
+    mo.hstack(
+        [
+            mo.md(f"""
+            ## Lab 2 takes 20 minutes
 
-    Go to **Lab 2** in Colab.
+            Go to **Lab 2** in [Colab]({colab_url}).
 
-    1. Predict and test the messages for 25, 60 and 61 bookings.
-    2. Read two errors and fix the code.
-    3. Use the documentation to round a room’s occupancy percentage.
+            1. Predict and test the messages for 25, 60 and 61 bookings.
+            2. Read two errors and fix the code.
+            3. Use the documentation to round a room’s occupancy percentage.
 
-    Finish with the checkpoint. Group bookings and a logic bug are optional extensions.
-    """)
+            Finish with the checkpoint. Group bookings and a logic bug are optional extensions.
+            """),
+            colab_qr,
+        ],
+        widths=[2, 1],
+        align="center",
+    )
     return
 
 
